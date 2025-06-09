@@ -1,1 +1,81 @@
 
+A DTO (Data Transfer Object) class in Java is a simple POJO (Plain Old Java Object) used to transfer data between processes, layers, or modules. DTOs are commonly used in layered applications (e.g., controller → service → repository) to encapsulate data without any business logic.
+
+✅ Key Characteristics of a DTO:
+Contains only fields and getter/setter methods
+
+No business logic
+
+Serializable (optional, useful in distributed systems)
+
+Used to reduce the number of method calls or customize API responses
+
+✅ Example: UserDTO.java
+java
+Copy
+Edit
+public class UserDTO {
+    private Long id;
+    private String name;
+    private String email;
+
+    public UserDTO() {
+    }
+
+    public UserDTO(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+✅ When to Use DTOs
+To decouple database entities from API responses
+
+To control exposed fields (e.g., hiding passwords)
+
+To combine multiple entities into one object
+
+To validate or transform data before sending to a client
+
+✅ Tools That Help with DTOs
+MapStruct or ModelMapper – for automatic mapping between DTOs and entities
+
+Lombok – to reduce boilerplate code (@Data, @AllArgsConstructor, etc.)
+
+java
+Copy
+Edit
+import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDTO {
+    private Long id;
+    private String name;
+    private String email;
+}
