@@ -59,23 +59,74 @@ To combine multiple entities into one object
 
 To validate or transform data before sending to a client
 
-✅ Tools That Help with DTOs
-MapStruct or ModelMapper – for automatic mapping between DTOs and entities
+@Entity is a JPA (Java Persistence API) annotation used to mark a Java class as a persistent entity—i.e., it will map to a table in a relational database.
 
-Lombok – to reduce boilerplate code (@Data, @AllArgsConstructor, etc.)
+✅ What is @Entity in Java?
+@Entity is placed on top of a Java class.
 
+The class represents a table in the database.
+
+Each instance of the class represents a row in that table.
+
+Fields map to columns.
+
+✅ Basic Example
 java
 Copy
 Edit
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserDTO {
+@Entity
+@Table(name = "users") // Optional: maps to "users" table
+public class User {
+
+    @Id
     private Long id;
     private String name;
     private String email;
+
+    // Constructors
+    public User() {}
+
+    public User(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
+✅ Key Annotations Used with @Entity:
+Annotation	Purpose
+@Entity	Marks class as a JPA entity
+@Table(name = "")	Maps to specific DB table (optional)
+@Id	Marks the primary key field
+@GeneratedValue	Auto-generates primary key
+@Column(name = "")	Maps field to a DB column (optional)
+
+while creating Entity any @Entity we have to crate any field having Id @Id
