@@ -130,3 +130,95 @@ Annotation	Purpose
 @Column(name = "")	Maps field to a DB column (optional)
 
 while creating Entity any @Entity we have to crate any field having Id @Id
+✅ Corrected Version
+🔹 IDcard.java (Now a JPA Entity)
+java
+Copy
+Edit
+package com.vti.FirstProgram.dto;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "IDCard")
+public class IDcard {
+    @Id
+    private int id;
+
+    private String name;
+    private String address;
+
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+}
+🔹 Student.java (JPA Entity with OneToOne Mapping)
+java
+Copy
+Edit
+package com.vti.FirstProgram.dto;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Student")
+public class Student {
+
+    @Id
+    private int id;
+
+    @Column(name = "name")
+    private String name;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_card_id") // foreign key column in Student table
+    private IDcard iDcard;
+
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public IDcard getiDcard() {
+        return iDcard;
+    }
+    public void setiDcard(IDcard iDcard) {
+        this.iDcard = iDcard;
+    }
+}
+✅ Database Schema (What JPA expects)
+Table: Student
+id (PK)
+name
+id_card_id (FK) → IDCard.id
+
+Table: IDCard
+id (PK)
+name
+address
